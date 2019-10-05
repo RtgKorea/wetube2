@@ -3,15 +3,15 @@ import routes from "../routes";
 import {
   videos,
   upload,
-  videosDetail,
   editVideo,
-  deleteVideo
+  deleteVideo,
+  videoDetail
 } from "../controllers/videoController";
 
 const videoRouter = express();
 
 videoRouter.get(routes.upload, upload);
-videoRouter.get(routes.videoDetail, videosDetail);
+videoRouter.get(routes.videoDetail, videoDetail);
 videoRouter.get(routes.editVideo, editVideo);
 videoRouter.get(routes.deleteVideo, deleteVideo);
 
