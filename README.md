@@ -5,9 +5,9 @@ Restart studying wetube lecture
 ## Pages :
 
 - [ ] Home
-- [ ] Join
-- [ ] login
-- [ ] Search
+- [x] Join
+- [x] login
+- [x] Search
 - [ ] User Detail
 - [ ] Edit Profile
 - [ ] Change Password
