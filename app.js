@@ -13,6 +13,8 @@ const app = express();
 
 app.use(helmet());
 app.set("view engine", "pug");
+app.use("/uploads", express.static(__dirname + "/uploads"));
+app.use("/static", express.static(__dirname + "/static"));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
