@@ -4,13 +4,13 @@ Restart studying wetube lecture
 
 ## Pages :
 
-- [ ] Home
+- [x] Home
 - [x] Join
 - [x] login
 - [x] Search
-- [ ] User Detail
-- [ ] Edit Profile
+- [x] User Detail
+- [x] Edit Profile
 - [ ] Change Password
-- [ ] Upload
-- [ ] Video detail
-- [ ] Edit Video
+- [x] Upload
+- [x] Video detail
+- [x] Edit Video
