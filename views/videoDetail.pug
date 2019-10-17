@@ -3,9 +3,11 @@ extends layouts/main.pug
 block content 
   .video-detail__container
     .video__player
-      video(src=`/${video.fileUrl}`, width=450)
+      video(src=`/${video.fileUrl}`, width=650)
     .video__info
-      a(href=routes.editVideo(video.id)) Edit Video
+      if video.creator.id !== loggedUser.id
+        a(href=routes.editVideo(video.id)) Edit Video
+          button Edit Video
       h5.video__title=video.title
       p.video__description=video.description
       if video.views === 1
@@ -17,3 +19,6 @@ block content
         span.video__comment-number 1 comment
       else 
         span.video__comment-number #{video.comments.length} comments
+    .video_author
+      |uploading By
+      a(href=routes.userDetail(video.creator.id))=video.creator.name
