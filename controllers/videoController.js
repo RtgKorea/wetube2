@@ -49,7 +49,6 @@ export const videoDetail = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id).populate("creator");
-    console.log(video);
     res.render("videoDetail", { pageTitle: "ViewDetail", video });
   } catch (error) {
     console.log(error);
@@ -62,10 +61,9 @@ export const getEditVideo = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
-    if (video.creator !== req.user.id) {
-      throw Error();
-    }
-    res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
+
+    if (video.creator != req.user.id) throw Error();
+    else res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
   } catch (err) {
     console.log(err);
     res.redirect(routes.home);
@@ -77,7 +75,13 @@ export const postEditVideo = async (req, res) => {
     params: { id }
   } = req;
   try {
-    await Video.findOneAndUpdate({ _id: id }, { title, description });
+    const video = await Video.findOneAndUpdate(
+      { _id: id },
+      { title, description }
+    );
+    console.log("TCL: postEditVideo -> video", video);
+    if (video.creator != req.user.id) throw Error();
+
     res.redirect(routes.videoDetail(id));
   } catch (err) {
     console.log(err);
@@ -89,6 +93,8 @@ export const deleteVideo = async (req, res) => {
   } = req;
 
   try {
+    const video = await Video.findById({ id });
+    if (video.creator != req.user.id) throw Error();
     await Video.findOneAndRemove({ _id: id });
   } catch (err) {
     console.log(err);

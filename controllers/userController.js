@@ -23,9 +23,9 @@ export const postJoin = async (req, res, next) => {
     } catch (err) {
       console.log(err);
       res.redirect(reoutes.home);
+      res.render("Join", { pageTitle: "Join" });
     }
   }
-  res.render("Join", { pageTitle: "Join" });
 };
 export const getLogin = (req, res) => {
   res.render("Login", { pageTitle: "Login" });
@@ -70,9 +70,7 @@ export const logout = (req, res) => {
   req.logout();
   res.redirect(routes.home);
 };
-export const getMe = (req, res) => {
-  res.render("userDetail", { pageTtile: "User Detail", user: req.user });
-};
+
 export const facebookLogin = passport.authenticate("facebook");
 
 export const facebookLoginCallback = (_, __, profile, cb) => {
@@ -86,12 +84,17 @@ export const postFacebookLogin = (req, res) => {
   res.redirect(routes.home);
 };
 
+export const getMe = (req, res) => {
+  console.log(req.user);
+  res.render("userDetail", { pageTtile: "User Detail", user: req.user });
+};
 export const userDetail = async (req, res) => {
   const {
     params: { id }
   } = req;
   try {
-    const user = await User.findById({ _id: id });
+    const user = await User.findById({ _id: id }).populate("videos");
+    console.log(user);
     res.render("userDetail", { pageTitle: "userDetail", user });
   } catch (err) {
     res.redirect(routes.home);
@@ -108,7 +111,7 @@ export const postEditProfile = async (req, res) => {
     await User.findByIdAndUpdate(req.user.id, {
       name,
       email,
-      avatarUrl: file ? file.path : req.user.avatarUrl
+      avatarUrl: file ? `/${file.path}` : req.user.avatarUrl
     });
     res.redirect(routes.users + routes.me);
   } catch (err) {

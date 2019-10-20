@@ -1,12 +1,14 @@
 extends layouts/main.pug
+include mixins/videoPlayer
 
 block content 
   .video-detail__container
-    .video__player
-      video(src=`/${video.fileUrl}`, width=650)
+    +videoPlayer({
+      src: video.fileUrl
+    })
     .video__info
-      if video.creator.id !== loggedUser.id
-        a(href=routes.editVideo(video.id)) Edit Video
+      if loggedUser && video.creator.id === loggedUser.id
+        a(href=routes.editVideo(video.id))
           button Edit Video
       h5.video__title=video.title
       p.video__description=video.description
@@ -14,11 +16,11 @@ block content
         span.video__views 1 view
       else
         span.video__views #{video.views} views
+      .video_author
+        |uploading By
+        a(href=routes.userDetail(video.creator.id))=video.creator.name
     .video__comments
       if video.comments.length === 1
         span.video__comment-number 1 comment
       else 
         span.video__comment-number #{video.comments.length} comments
-    .video_author
-      |uploading By
-      a(href=routes.userDetail(video.creator.id))=video.creator.name
