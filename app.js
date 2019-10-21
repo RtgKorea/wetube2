@@ -8,6 +8,7 @@ import session from "express-session";
 import userRouter from "./routes/userRouter";
 import globalRouter from "./routes/globalRouter";
 import videoRouter from "./routes/videoRouter";
+import apiRouter from "./routes/apiRouter";
 import routes from "./routes";
 import { localMiddleware } from "./middlewares";
 import mongoose from "mongoose";
@@ -38,6 +39,7 @@ app.use(passport.session());
 
 app.use(localMiddleware);
 
+app.use(routes.api, apiRouter);
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
