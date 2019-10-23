@@ -1,9 +1,13 @@
-import axios from "axios";
-import { comment } from "postcss-selector-parser";
-
+// import axios from "axios";
 const addCommentForm = document.getElementById("jsAddComment");
 const commentList = document.getElementById("jsCommentList");
 const commentNumber = document.getElementById("jsCommentNumber");
+// const deleteComment = document.getElementsByClassName("jsDeleteComment");
+
+// const handleDelete = event => {
+//   const comment = event.target.parentElement;
+//   comment.remove();
+// };
 
 const increaseNumber = () => {
   commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
@@ -27,7 +31,6 @@ const sendComment = async comment => {
       comment
     }
   });
-  console.log(response);
   if (response.status == 200) addComment(comment);
 };
 
@@ -41,6 +44,7 @@ const handleSubmit = event => {
 
 function init() {
   addCommentForm.addEventListener("submit", handleSubmit);
+  // deleteComment.addEventListener("click", handleDelete);
 }
 
 if (addCommentForm) init();
