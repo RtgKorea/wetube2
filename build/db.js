@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
 var _dotenv = _interopRequireDefault(require("dotenv"));
@@ -7,8 +9,6 @@ var _dotenv = _interopRequireDefault(require("dotenv"));
 require("./models/Video");
 
 require("./models/Comment");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _dotenv["default"].config();
 

@@ -1,5 +1,13 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+
+var _getBlobDuration = _interopRequireDefault(require("get-blob-duration"));
+
 var videoContainer = document.getElementById("jsVideoPlayer");
 var videoPlayer = document.querySelector("#jsVideoPlayer video");
 var playBtn = document.getElementById("jsPlayButton");
@@ -15,6 +23,46 @@ var registerView = function registerView() {
     method: "POST"
   });
 };
+
+function setTotalTime() {
+  return _setTotalTime.apply(this, arguments);
+}
+
+function _setTotalTime() {
+  _setTotalTime = (0, _asyncToGenerator2["default"])(
+  /*#__PURE__*/
+  _regenerator["default"].mark(function _callee() {
+    var blob, duration, totalTimeString;
+    return _regenerator["default"].wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return fetch(videoPlayer.src).then(function (response) {
+              return response.blob();
+            });
+
+          case 2:
+            blob = _context.sent;
+            _context.next = 5;
+            return (0, _getBlobDuration["default"])(blob);
+
+          case 5:
+            duration = _context.sent;
+            console.log(duration);
+            totalTimeString = formatDate(duration);
+            totalTime.innerHTML = totalTimeString;
+            setTimeout(getCurrentTime, 1000);
+
+          case 10:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _setTotalTime.apply(this, arguments);
+}
 
 function handlePlayClick() {
   if (videoPlayer.paused) {
@@ -72,12 +120,6 @@ var formatDate = function formatDate(seconds) {
 
   return "".concat(hours, ":").concat(minutes, ":").concat(totalSeconds);
 };
-
-function setTotalTime() {
-  var totalTimeString = formatDate(videoPlayer.duration);
-  totalTime.innerHTML = totalTimeString;
-  setInterval(getCurrentTime, 1000);
-}
 
 function getCurrentTime() {
   currentTime.innerHTML = formatDate(Math.floor(videoPlayer.currentTime));

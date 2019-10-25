@@ -1,21 +1,21 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.postChangePassword = exports.getChangePassword = exports.postEditProfile = exports.getEditProfile = exports.userDetail = exports.getMe = exports.postFacebookLogin = exports.facebookLoginCallback = exports.facebookLogin = exports.logout = exports.postGithubLogin = exports.githubLoginCallback = exports.getGithubLogin = exports.postLogin = exports.getLogin = exports.postJoin = exports.getJoin = void 0;
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
 var _passport = _interopRequireDefault(require("passport"));
 
 var _routes = _interopRequireDefault(require("../routes"));
 
 var _User = _interopRequireDefault(require("../models/User"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var getJoin = function getJoin(req, res) {
   res.render("Join", {
@@ -28,12 +28,12 @@ exports.getJoin = getJoin;
 var postJoin =
 /*#__PURE__*/
 function () {
-  var _ref = _asyncToGenerator(
+  var _ref = (0, _asyncToGenerator2["default"])(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(req, res, next) {
+  _regenerator["default"].mark(function _callee(req, res, next) {
     var _req$body, name, email, password, password2, user;
 
-    return regeneratorRuntime.wrap(function _callee$(_context) {
+    return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -115,12 +115,12 @@ exports.getGithubLogin = getGithubLogin;
 var githubLoginCallback =
 /*#__PURE__*/
 function () {
-  var _ref2 = _asyncToGenerator(
+  var _ref2 = (0, _asyncToGenerator2["default"])(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee2(_, __, profile, cb) {
+  _regenerator["default"].mark(function _callee2(_, __, profile, cb) {
     var _profile$_json, id, avatarUrl, email, name, user, newUser;
 
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+    return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
@@ -223,11 +223,11 @@ exports.getMe = getMe;
 var userDetail =
 /*#__PURE__*/
 function () {
-  var _ref3 = _asyncToGenerator(
+  var _ref3 = (0, _asyncToGenerator2["default"])(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee3(req, res) {
+  _regenerator["default"].mark(function _callee3(req, res) {
     var id, user;
-    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+    return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
@@ -240,25 +240,24 @@ function () {
 
           case 4:
             user = _context3.sent;
-            console.log(user);
             res.render("userDetail", {
               pageTitle: "userDetail",
               user: user
             });
-            _context3.next = 12;
+            _context3.next = 11;
             break;
 
-          case 9:
-            _context3.prev = 9;
+          case 8:
+            _context3.prev = 8;
             _context3.t0 = _context3["catch"](1);
             res.redirect(_routes["default"].home);
 
-          case 12:
+          case 11:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[1, 9]]);
+    }, _callee3, null, [[1, 8]]);
   }));
 
   return function userDetail(_x8, _x9) {
@@ -279,12 +278,12 @@ exports.getEditProfile = getEditProfile;
 var postEditProfile =
 /*#__PURE__*/
 function () {
-  var _ref4 = _asyncToGenerator(
+  var _ref4 = (0, _asyncToGenerator2["default"])(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee4(req, res) {
+  _regenerator["default"].mark(function _callee4(req, res) {
     var _req$body2, email, name, file;
 
-    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+    return _regenerator["default"].wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
@@ -294,7 +293,7 @@ function () {
             return _User["default"].findByIdAndUpdate(req.user.id, {
               name: name,
               email: email,
-              avatarUrl: file ? "/".concat(file.path) : req.user.avatarUrl
+              avatarUrl: file ? file.location : req.user.avatarUrl
             });
 
           case 4:
@@ -334,12 +333,12 @@ exports.getChangePassword = getChangePassword;
 var postChangePassword =
 /*#__PURE__*/
 function () {
-  var _ref5 = _asyncToGenerator(
+  var _ref5 = (0, _asyncToGenerator2["default"])(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee5(req, res) {
+  _regenerator["default"].mark(function _callee5(req, res) {
     var _req$body3, oldPassword, newPassword, newPassword2;
 
-    return regeneratorRuntime.wrap(function _callee5$(_context5) {
+    return _regenerator["default"].wrap(function _callee5$(_context5) {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:

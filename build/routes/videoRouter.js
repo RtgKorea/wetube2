@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -12,8 +14,6 @@ var _routes = _interopRequireDefault(require("../routes"));
 var _videoController = require("../controllers/videoController");
 
 var _middlewares = require("../middlewares");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var videoRouter = (0, _express["default"])();
 videoRouter.get(_routes["default"].upload, _middlewares.onlyPrivate, _videoController.getUpload);

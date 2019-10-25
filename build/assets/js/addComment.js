@@ -1,18 +1,19 @@
 "use strict";
 
-var _axios = _interopRequireDefault(require("axios"));
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _postcssSelectorParser = require("postcss-selector-parser");
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
+// import axios from "axios";
 var addCommentForm = document.getElementById("jsAddComment");
 var commentList = document.getElementById("jsCommentList");
-var commentNumber = document.getElementById("jsCommentNumber");
+var commentNumber = document.getElementById("jsCommentNumber"); // const deleteComment = document.getElementsByClassName("jsDeleteComment");
+// const handleDelete = event => {
+//   const comment = event.target.parentElement;
+//   comment.remove();
+// };
 
 var increaseNumber = function increaseNumber() {
   commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
@@ -30,17 +31,17 @@ var addComment = function addComment(comment) {
 var sendComment =
 /*#__PURE__*/
 function () {
-  var _ref = _asyncToGenerator(
+  var _ref = (0, _asyncToGenerator2["default"])(
   /*#__PURE__*/
-  regeneratorRuntime.mark(function _callee(comment) {
+  _regenerator["default"].mark(function _callee(comment) {
     var videoId, response;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
+    return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             videoId = window.location.href.split("/videos/")[1];
             _context.next = 3;
-            return (0, _axios["default"])({
+            return axios({
               url: "/api/".concat(videoId, "/comment"),
               method: "POST",
               data: {
@@ -50,10 +51,9 @@ function () {
 
           case 3:
             response = _context.sent;
-            console.log(response);
             if (response.status == 200) addComment(comment);
 
-          case 6:
+          case 5:
           case "end":
             return _context.stop();
         }
@@ -75,7 +75,7 @@ var handleSubmit = function handleSubmit(event) {
 };
 
 function init() {
-  addCommentForm.addEventListener("submit", handleSubmit);
+  addCommentForm.addEventListener("submit", handleSubmit); // deleteComment.addEventListener("click", handleDelete);
 }
 
 if (addCommentForm) init();

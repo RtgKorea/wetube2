@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import passport from "passport";
 import session from "express-session";
+import path from "path";
 import userRouter from "./routes/userRouter";
 import globalRouter from "./routes/globalRouter";
 import videoRouter from "./routes/videoRouter";
@@ -20,8 +21,10 @@ const CookieStore = MongoStore(session);
 
 app.use(helmet());
 app.set("view engine", "pug");
-app.use("/uploads", express.static(__dirname + "/uploads"));
+app.set("views", path.join(__dirname, "views"));
+// console.log("TCL: __dirname", __dirname);
 app.use("/static", express.static(__dirname + "/static"));
+// app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,9 +42,9 @@ app.use(passport.session());
 
 app.use(localMiddleware);
 
-app.use(routes.api, apiRouter);
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
+app.use(routes.api, apiRouter);
 
 export default app;

@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -7,16 +9,31 @@ exports.uploadAvatar = exports.uploadVideo = exports.onlyPrivate = exports.onlyP
 
 var _routes = _interopRequireDefault(require("./routes"));
 
+var _multerS = _interopRequireDefault(require("multer-s3"));
+
+var _awsSdk = _interopRequireDefault(require("aws-sdk"));
+
 var _multer = _interopRequireDefault(require("multer"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
+var s3 = new _awsSdk["default"].S3({
+  accessKeyId: process.env.AWS_ID,
+  secretAccessKey: process.env.AWS_SECRET
+});
 var multerVideo = (0, _multer["default"])({
-  dest: "uploads/videos/"
+  storage: (0, _multerS["default"])({
+    s3: s3,
+    acl: "public-read",
+    bucket: "williswetube2/videos"
+  })
 });
 var multerAvatar = (0, _multer["default"])({
-  dest: "uploads/avatar/"
-});
+  storage: (0, _multerS["default"])({
+    s3: s3,
+    acl: "public-read",
+    bucket: "williswetube2/avatar"
+  })
+}); // const multerVideo = multer({ dest: "uploads/videos/" });
+// const multerAvatar = multer({ dest: "uploads/avatar/" });
 
 var localMiddleware = function localMiddleware(req, res, next) {
   res.locals.siteName = "WeTube";

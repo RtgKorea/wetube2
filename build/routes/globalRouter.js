@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -16,8 +18,6 @@ var _videoController = require("../controllers/videoController");
 var _userController = require("../controllers/userController");
 
 var _middlewares = require("../middlewares");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var globalRouter = (0, _express["default"])();
 globalRouter.get(_routes["default"].join, _middlewares.onlyPublic, _userController.getJoin);

@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -19,8 +21,6 @@ var _passport = _interopRequireDefault(require("passport"));
 
 var _expressSession = _interopRequireDefault(require("express-session"));
 
-var _path = _interopRequireDefault(require("path"));
-
 var _userRouter = _interopRequireDefault(require("./routes/userRouter"));
 
 var _globalRouter = _interopRequireDefault(require("./routes/globalRouter"));
@@ -39,14 +39,15 @@ var _connectMongo = _interopRequireDefault(require("connect-mongo"));
 
 require("./passport");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+var _path = _interopRequireDefault(require("path"));
 
 var app = (0, _express["default"])();
 var CookieStore = (0, _connectMongo["default"])(_expressSession["default"]);
 app.use((0, _helmet["default"])());
 app.set("view engine", "pug");
 app.set("views", _path["default"].join(__dirname, "views"));
-app.use("/static", _express["default"]["static"](_path["default"].join(__dirname, "static")));
+app.use("/uploads", _express["default"]["static"](__dirname + "/uploads"));
+app.use("/static", _express["default"]["static"](__dirname + "/static"));
 app.use((0, _cookieParser["default"])());
 app.use(_bodyParser["default"].json());
 app.use(_bodyParser["default"].urlencoded({
